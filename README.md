@@ -1,5 +1,6 @@
 # indieGit
 
+
 > Software-enforced workflows with Git
 
 ## Problem space

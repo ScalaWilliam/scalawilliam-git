@@ -4,6 +4,19 @@
 > Software-enforced workflows with Git
 
 ## Problem space
+Centralised Git hosting services come with batteries included but they don't scale to your workflows.
+You end up using multiple systems just to complete one piece of work, and none of them integrate very nicely.
+
+For example, for a typical piece of work:
+
+1. Create JIRA/GitHub issue
+2. Decide with business which is most important
+3. Create a branch with a name that may or may not match the JIRA issue's name
+4. Some people skip all the first three steps.
+5. Create a PR, then finally merge.
+6. You have noise all over the place :-)
+
+Why so many variables?
 
 ## Technical choices
 

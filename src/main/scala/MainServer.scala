@@ -32,6 +32,7 @@ object MainServer extends App {
 
   servletHandler.addServletWithMapping(new ServletHolder(gitServlet), "/git/*")
   servletHandler.addServletWithMapping(new ServletHolder(indexServlet), "/")
+  servletHandler.addServletWithMapping(new ServletHolder(new PCRServlet(repository)), "/post-request/")
   server.start()
   server.join()
 

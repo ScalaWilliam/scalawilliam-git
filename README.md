@@ -40,3 +40,11 @@ Cause we're dealing with lots of mutable Java code behind servlets, some things 
 In order to debug, from SBT, you can right click MainServer and press Debug. You will need to edit the 'configuration' of this run
 to add the environment variables above as well.
 
+
+## Integrated issue system
+
+This Issue system will only allow users to push to specific branches that are created as a result of an Issue.
+
+Branch names will be pre-allocated and can be cloned as well, with easy intructions.
+
+No more messing about in deciding what branch name to use - or using some funky scheme. Let the software decide.

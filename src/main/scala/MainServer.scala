@@ -6,9 +6,6 @@ import org.eclipse.jetty.servlet.{ServletHandler, ServletHolder}
 import org.eclipse.jgit.http.server.GitServlet
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder
 
-/**
-  * > git clone http://localhost:8080/any-repo-name
-  */
 object MainServer extends App {
 
   val configuration = ConfigFactory.load()

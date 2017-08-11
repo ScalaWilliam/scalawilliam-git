@@ -18,4 +18,17 @@ First, install [sbt](https://www.scalawilliam.com/essential-sbt/).
 $ export HTTP_PORT=8080
 $ export GIT_DIR=/some/repo/.git/
 $ sbt run
+$ git clone http://localhost:8080/any-repo-name 
+```
+
+To enable HTTP pushes, edit `GIT_DIR` and add the following:
+```
+[http]
+	receivepack = true
+```
+
+Then you can do:
+
+```
+$ git push origin HEAD
 ```

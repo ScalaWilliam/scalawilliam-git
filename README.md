@@ -79,3 +79,21 @@ Make change to source-code and it'll restart the app for you - using `~re-start`
 ## Reference
 
 This book is great: https://github.com/centic9/jgit-cookbook/
+
+
+## More explanation
+
+Because all data is in Git and independent...
+
+We don't need no APIs
+
+We don't need no REST
+
+We don't need no GraphQL
+
+We don't need no artificial rate limiting
+
+We don't need no complication
+
+And many other benefits!
+

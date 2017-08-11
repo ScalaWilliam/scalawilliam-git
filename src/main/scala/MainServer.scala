@@ -28,6 +28,7 @@ object MainServer extends App {
   val servletHandler = new ServletHandler
   server.setHandler(servletHandler)
   val servletHolder = new ServletHolder(gitServlet)
+
   servletHandler.addServletWithMapping(servletHolder, "/*")
   server.start()
   server.join()

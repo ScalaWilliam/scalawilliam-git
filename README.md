@@ -61,3 +61,9 @@ This Issue system will only allow users to push to specific branches that are cr
 Branch names will be pre-allocated and can be cloned as well, with easy intructions.
 
 No more messing about in deciding what branch name to use - or using some funky scheme. Let the software decide.
+
+## Developing with iterations
+
+Use sbt-revolver command `re-start` to start the app in background. Use it again to restart it.
+
+Make change to source-code and it'll restart the app for you - using `~re-start`.

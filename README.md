@@ -32,3 +32,11 @@ Then you can do:
 ```
 $ git push origin HEAD
 ```
+
+
+## Debugging just in case
+
+Cause we're dealing with lots of mutable Java code behind servlets, some things may not work as expected.
+In order to debug, from SBT, you can right click MainServer and press Debug. You will need to edit the 'configuration' of this run
+to add the environment variables above as well.
+

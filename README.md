@@ -1,6 +1,5 @@
 # indieGit
 
-
 > Software-enforced workflows with Git
 
 ## Problem space
@@ -31,7 +30,7 @@ First, install [sbt](https://www.scalawilliam.com/essential-sbt/).
 $ export HTTP_PORT=8080
 $ export GIT_DIR=/some/repo/.git/
 $ sbt run
-$ git clone http://localhost:8080/any-repo-name 
+$ git clone http://localhost:8080/git/some-repo
 ```
 
 To enable HTTP pushes, edit `GIT_DIR` and add the following:
@@ -46,13 +45,11 @@ Then you can do:
 $ git push origin HEAD
 ```
 
-
 ## Debugging just in case
 
 Cause we're dealing with lots of mutable Java code behind servlets, some things may not work as expected.
 In order to debug, from SBT, you can right click MainServer and press Debug. You will need to edit the 'configuration' of this run
 to add the environment variables above as well.
-
 
 ## Integrated issue system
 
@@ -62,8 +59,23 @@ Branch names will be pre-allocated and can be cloned as well, with easy intructi
 
 No more messing about in deciding what branch name to use - or using some funky scheme. Let the software decide.
 
+Data is stored inside the Git repository itself using [Git notes](https://git-scm.com/docs/git-notes) 
+([another link](http://alblue.bandlem.com/2011/11/git-tip-of-week-git-notes.html), &
+[some tips](https://gist.github.com/topheman/ec8cde7c54e24a785e52)).
+
+Appending a note, for example:
+
+```
+$ git notes --ref change-requests append -m '{"created_time": "2017-08-11T10:00:00Z", "title": "Figure out how to host two servlets in the same space", "description": "Setting one servlet at `/` and another at `/*` always directs to the second one, regardless of the mapping order.", "by": "William"}'
+```
+
 ## Developing with iterations
 
 Use sbt-revolver command `re-start` to start the app in background. Use it again to restart it.
 
 Make change to source-code and it'll restart the app for you - using `~re-start`.
+
+
+## Reference
+
+This book is great: https://github.com/centic9/jgit-cookbook/

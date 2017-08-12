@@ -36,8 +36,8 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
 
     <html>
     <head>
-      <link rel="self" href="https://git.digitalocean.scalawilliam.com/"/>
-      <link rel="hub" href="https://switchboard.p3k.io/"/>
+      <link rel="self" href={CRServlet.myUrl}/>
+      <link rel="hub" href={CRServlet.switchboardUrl}/>
     </head>
     <body>
       {cloneInstruction}
@@ -47,4 +47,9 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
     </body>
     </html>
   }
+}
+
+object CRServlet {
+  val myUrl = "https://git.digitalocean.scalawilliam.com/"
+  val switchboardUrl = "https://switchboard.p3k.io/"
 }

@@ -9,6 +9,7 @@ libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.25"
 libraryDependencies += "com.typesafe" % "config" % "1.3.1"
 libraryDependencies += "org.scalatra" %% "scalatra" % "2.5.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.3"
+libraryDependencies += "org.apache.httpcomponents" % "fluent-hc" % "4.5.3"
 
 cancelable in Global := true
 

@@ -1,10 +1,17 @@
 import java.io.File
+import java.util
+import javax.servlet.http.HttpServletRequest
 
 import com.typesafe.config.ConfigFactory
+import org.apache.http.client.fluent.Request
+import org.apache.http.message.BasicNameValuePair
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.servlet.{ServletHandler, ServletHolder}
 import org.eclipse.jgit.http.server.GitServlet
+import org.eclipse.jgit.http.server.resolver.DefaultReceivePackFactory
+import org.eclipse.jgit.lib.Repository
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder
+import org.eclipse.jgit.transport.{PostReceiveHook, ReceiveCommand, ReceivePack}
 
 object MainServer extends App {
 
@@ -25,6 +32,36 @@ object MainServer extends App {
     }
 
   val gitServlet = new GitServlet
+
+
+  /**
+    * Send notifications to switchboard.
+    */
+  val postReceiveHook: PostReceiveHook =
+    (rp: ReceivePack, commands: util.Collection[ReceiveCommand]) => {
+      val response = Request
+        .Post(CRServlet.switchboardUrl)
+        .bodyForm(
+          new BasicNameValuePair("hub.mode", "publish"),
+          new BasicNameValuePair("hub.url", CRServlet.myUrl)
+        )
+        .execute()
+      println(response)
+    }
+
+  val packFactory = new DefaultReceivePackFactory {
+    override def create(req: HttpServletRequest, db: Repository): ReceivePack = {
+      val rp = super.create(req, db)
+      rp.setPostReceiveHook(postReceiveHook)
+      rp
+    }
+  }
+
+  gitServlet.setReceivePackFactory(packFactory)
+
+
+
+
   gitServlet.setRepositoryResolver { (_, _) =>
     repository.incrementOpen()
     repository

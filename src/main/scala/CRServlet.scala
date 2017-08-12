@@ -65,6 +65,7 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
     </body>
     </html>
   }
+
 }
 
 object CRServlet {

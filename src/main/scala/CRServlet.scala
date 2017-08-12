@@ -2,6 +2,10 @@ import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.lib.Repository
 import org.scalatra._
 
+/**
+  * This is only ugly temporary code.
+  * @param repository
+  */
 class CRServlet(repository: Repository) extends ScalatraServlet {
 
   private def postRequestForm = {

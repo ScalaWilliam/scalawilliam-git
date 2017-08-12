@@ -33,7 +33,6 @@ object MainServer extends App {
 
   val gitServlet = new GitServlet
 
-
   /**
     * Send notifications to switchboard.
     */
@@ -47,6 +46,7 @@ object MainServer extends App {
         )
         .execute()
       println(response)
+      commands.forEach(c => println(c))
     }
 
   val packFactory = new DefaultReceivePackFactory {
@@ -58,9 +58,6 @@ object MainServer extends App {
   }
 
   gitServlet.setReceivePackFactory(packFactory)
-
-
-
 
   gitServlet.setRepositoryResolver { (_, _) =>
     repository.incrementOpen()

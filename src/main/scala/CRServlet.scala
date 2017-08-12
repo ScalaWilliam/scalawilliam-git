@@ -36,7 +36,8 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
 
     <html>
     <head>
-    <link rel="hub" href="https://switchboard.p3k.io/"/>
+      <link rel="self" href="https://git.digitalocean.scalawilliam.com/"/>
+      <link rel="hub" href="https://switchboard.p3k.io/"/>
     </head>
     <body>
       {cloneInstruction}

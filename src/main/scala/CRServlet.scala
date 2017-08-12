@@ -55,6 +55,7 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
       <link rel="hub" href={CRServlet.switchboardUrl}/>
     </head>
     <body>
+      <h1>Future of Git</h1>
       {cloneInstruction}
       {postRequestForm}
       <hr/>

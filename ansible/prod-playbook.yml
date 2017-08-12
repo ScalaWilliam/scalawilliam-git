@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  become: yes
+  vars:
+    web_hostname: git.digitalocean.scalawilliam.com
+    upstream_port: 12831
+  roles:
+    - role: app-nginx-config
+    - role: java8
+    - role: nginx
+    - role: redirect-https-www
+    - role: auto-ssl
+      registration_email: hello@scalawilliam.com

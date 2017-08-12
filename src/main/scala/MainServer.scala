@@ -59,7 +59,8 @@ object MainServer extends App {
 
   gitServlet.setReceivePackFactory(packFactory)
 
-  gitServlet.setRepositoryResolver { (_, _) =>
+  gitServlet.setRepositoryResolver { (_, name) =>
+    println(s"Repository name found = ${name}")
     repository.incrementOpen()
     repository
   }

@@ -1,0 +1,5 @@
+server {
+  listen 80;
+  server_name {{ web_hostname }};
+  return 302 https://{{ web_hostname }}$request_uri;
+}

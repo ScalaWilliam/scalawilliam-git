@@ -1,0 +1,11 @@
+
+- name: copy nginx template configuration
+  template: >
+    src=redirect.nginx.conf.j2
+    dest=/etc/nginx/conf.d/redirect-{{ web_hostname }}.conf
+    mode=0755
+
+- name: reload nginx service
+  systemd:
+    name: nginx
+    state: reloaded

@@ -1,0 +1,62 @@
+- name: Set up app user
+  user:
+    name: "{{ user }}"
+
+- name: Create instance directory
+  file: "path={{ instance_dir }} state=directory"
+  become_user: "{{ user }}"
+
+- stat: "path=/home/{{ user }}/production.conf"
+  register: production_conf_file
+
+- name: copy systemd service template configuration
+  template: >
+    src=service.j2
+    dest="/etc/systemd/system/{{ service_name }}.service"
+    mode=0755
+  register: service_configuration
+
+- name: reload systemd
+  systemd:
+    name: "{{ service_name }}"
+    daemon_reload: yes
+  when: service_configuration.changed
+
+- name: Enable service
+  service:
+    name: "{{ service_name }}"
+    enabled: yes
+
+- name: Check if instance binary already exists
+  stat: "path={{ instance_dir }}/bin/{{ app_bin }}"
+  register: check_instance_directory
+  become_user: "{{ user }}"
+
+- name: Extract App archive
+  unarchive:
+    src: "{{ app_archive }}"
+    dest: "{{ instance_dir }}"
+    remote_src: True
+    extra_opts: ['--strip-components=1', '--show-stored-names']
+  when: (check_instance_directory.stat.exists == False) or (force_deploy == True)
+  register: archive_extracted
+
+- name: restart and enable the service
+  systemd:
+    name: "{{ service_name }}"
+    state: restarted
+    enabled: yes
+  when: service_configuration.changed or (archive_extracted is defined)
+
+- name: ensure service can be restarted by the user
+  template: >
+    src=sudoers.j2
+    dest=/etc/sudoers.d/{{ service_name }}
+    mode=0755
+
+- name: Wait for service to kick in
+  wait_for: "port={{ instance_port }} delay=5"
+
+- name: ensure that the service is working
+  action: "uri url=http://127.0.0.1:{{ instance_port }} return_content=yes"
+  register: webpage

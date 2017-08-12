@@ -1,0 +1,11 @@
+[Unit]
+Description=Service {{ service_name }}
+[Service]
+User={{ user }}
+Type=simple
+WorkingDirectory={{ instance_dir }}
+ExecStart={{ instance_dir }}/bin/{{ app_bin }}
+Environment=HTTP_PORT={{ instance_port }}
+Restart=on-abort
+[Install]
+WantedBy=default.target

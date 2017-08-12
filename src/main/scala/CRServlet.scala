@@ -8,7 +8,7 @@ import org.eclipse.jgit.treewalk.TreeWalk
 import org.eclipse.jgit.treewalk.filter.PathFilter
 import org.scalatra._
 
-import scala.xml.XML
+import scala.util.Try
 
 /**
   * This is only ugly temporary code.
@@ -99,7 +99,7 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
     </html>
 
     contentType = "text/html"
-    xml.toString.replaceAllLiterally("-readme-", readme)
+    xml.toString.replaceAllLiterally("-readme-", Try(readme).toOption.getOrElse(""))
   }
 
 }

@@ -23,10 +23,14 @@ object MainServer extends App {
   val repository =
     if (!gitDir.exists()) {
       val r = FileRepositoryBuilder.create(gitDir)
-      r.create(false)
+      r.create(true)
+      val config = r.getConfig
+      config.setBoolean("http", null, "receivepack", true)
+      config.save()
       r
     } else {
       val repositoryBuilder = new FileRepositoryBuilder()
+
       repositoryBuilder.setGitDir(gitDir)
       repositoryBuilder.build()
     }

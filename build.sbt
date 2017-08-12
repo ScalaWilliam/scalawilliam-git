@@ -10,6 +10,7 @@ libraryDependencies += "com.typesafe" % "config" % "1.3.1"
 libraryDependencies += "org.scalatra" %% "scalatra" % "2.5.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.3"
 libraryDependencies += "org.apache.httpcomponents" % "fluent-hc" % "4.5.3"
+libraryDependencies += "com.vladsch.flexmark" % "flexmark" % "0.26.2"
 
 cancelable in Global := true
 

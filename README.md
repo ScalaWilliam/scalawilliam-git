@@ -108,3 +108,16 @@ $ ansible-playbook --user=root -i swgit, ansible/prod-playbook.yml
 $ 
 $ ansible all --user=root -i swgit, -a 'systemctl status gitsw'
 ```
+
+
+## Continuous deployment
+
+Using [websub-execute](https://github.com/ScalaWilliam/websub-execute),
+
+```
+$ git clone https://git.digitalocean.scalawilliam.com/git/some-repo ~/Projects/test-gsw-1
+$ websub-execute -u https://git.digitalocean.scalawilliam.com/ -i -- 'cd ~/Projects/test-gsw-1 && git pull && sbt "show universal:packageZipTarball" && ansible-playbook -i swgit, ansible/prod-playbook.yml'
+```
+
+I can run this on my Mac if I need to :-)
+And then scale up to something bigger when more people are using the project...

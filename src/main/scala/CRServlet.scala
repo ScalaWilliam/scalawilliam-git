@@ -34,11 +34,16 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
         s"${n} -> $s"
       }
 
+    <html>
+    <head>
+    <link rel="hub" href="https://switchboard.p3k.io/"/>
+    </head>
     <body>
       {cloneInstruction}
       {postRequestForm}
       <hr/>
       {notesH.map{ n => <div>{n}</div>}}
     </body>
+    </html>
   }
 }

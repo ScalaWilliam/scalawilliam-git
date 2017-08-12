@@ -1,3 +1,5 @@
+name := "gsw"
+
 scalaVersion:= "2.12.3"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.3" % "test"
@@ -9,3 +11,8 @@ libraryDependencies += "org.scalatra" %% "scalatra" % "2.5.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.3"
 
 cancelable in Global := true
+
+/**
+  * Using this over <JavaServerAppPackaging> because that produces DEB/RPM, this requiring dependency on the host OS.
+  */
+enablePlugins(JavaAppPackaging)

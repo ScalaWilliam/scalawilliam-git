@@ -5,10 +5,22 @@
   vars:
     web_hostname: git.digitalocean.scalawilliam.com
     upstream_port: 12831
+    instance_port: 12831
+    app_archive: /tmp/wah.tgz
+    service_name: gitsw
+    app_bin: gsw
+    user: gitsw
+    instance_dir: /home/gitsw/app
+  pre_tasks:
+    - name: copy local deployment to remote
+      copy:
+        src: ../target/universal/gsw-0.1-SNAPSHOT.tgz
+        dest: /tmp/wah.tgz
   roles:
-    - role: app-nginx-config
     - role: java8
     - role: nginx
-    - role: redirect-https-www
+    - role: app-instance
     - role: auto-ssl
       registration_email: hello@scalawilliam.com
+    - role: app-nginx-config
+    - role: redirect-https-www

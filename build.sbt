@@ -16,3 +16,6 @@ cancelable in Global := true
   * Using this over <JavaServerAppPackaging> because that produces DEB/RPM, this requiring dependency on the host OS.
   */
 enablePlugins(JavaAppPackaging)
+enablePlugins(GitVersioning)
+git.useGitDescribe := true
+packageName in Universal := packageName.value

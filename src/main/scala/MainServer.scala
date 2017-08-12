@@ -10,13 +10,19 @@ object MainServer extends App {
 
   val configuration = ConfigFactory.load()
   val gitDir = new File(configuration.getString("gitdir"))
+
   val httpPort = configuration.getInt("httpPort")
 
-  val repository = {
-    val repositoryBuilder = new FileRepositoryBuilder()
-    repositoryBuilder.setGitDir(gitDir)
-    repositoryBuilder.build()
-  }
+  val repository =
+    if (!gitDir.exists()) {
+      val r = FileRepositoryBuilder.create(gitDir)
+      r.create(false)
+      r
+    } else {
+      val repositoryBuilder = new FileRepositoryBuilder()
+      repositoryBuilder.setGitDir(gitDir)
+      repositoryBuilder.build()
+    }
 
   val gitServlet = new GitServlet
   gitServlet.setRepositoryResolver { (_, _) =>
@@ -32,7 +38,9 @@ object MainServer extends App {
 
   servletHandler.addServletWithMapping(new ServletHolder(gitServlet), "/git/*")
   servletHandler.addServletWithMapping(new ServletHolder(indexServlet), "/")
-  servletHandler.addServletWithMapping(new ServletHolder(new PCRServlet(repository)), "/post-request/")
+  servletHandler.addServletWithMapping(
+    new ServletHolder(new PCRServlet(repository)),
+    "/post-request/")
   server.start()
   server.join()
 

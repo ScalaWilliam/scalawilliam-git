@@ -103,7 +103,8 @@ And many other benefits!
 Using [Ansible](https://www.ansible.com/get-started):
 
 ```
+$ sbt 'show universal:packageZipTarball'
 $ ansible-playbook --user=root -i swgit, ansible/prod-playbook.yml
-$ curl -i https://swgit/
+$ 
 $ ansible all --user=root -i swgit, -a 'systemctl status gitsw'
 ```

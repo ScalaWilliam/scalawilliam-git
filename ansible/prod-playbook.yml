@@ -11,10 +11,11 @@
     app_bin: gsw
     user: gitsw
     instance_dir: /home/gitsw/app
+    git_dir: /home/gitsw/git
   pre_tasks:
     - name: copy local deployment to remote
       copy:
-        src: ../target/universal/gsw-0.1-SNAPSHOT.tgz
+        src: ../target/universal/gsw.tgz
         dest: /tmp/wah.tgz
   roles:
     - role: java8

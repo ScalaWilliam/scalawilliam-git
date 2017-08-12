@@ -1,3 +1,4 @@
+/git/
 *.retry
 .idea
 target/

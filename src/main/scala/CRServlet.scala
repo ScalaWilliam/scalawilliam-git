@@ -4,7 +4,6 @@ import org.scalatra._
 
 /**
   * This is only ugly temporary code.
-  * @param repository
   */
 class CRServlet(repository: Repository) extends ScalatraServlet {
 

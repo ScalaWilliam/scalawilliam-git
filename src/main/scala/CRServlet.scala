@@ -13,6 +13,14 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
     </form>
   }
 
+  private def cloneInstruction = {
+    <section>
+      <h2>Clone main repository</h2>
+      <p>Note: this URL will change.</p>
+      <pre><code>git clone https://git.digitalocean.scalawilliam.com/git/some-repo</code></pre>
+    </section>
+  }
+
   get("/") {
     val notes = new Git(repository)
       .notesList()
@@ -27,6 +35,7 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
       }
 
     <body>
+      {cloneInstruction}
       {postRequestForm}
       <hr/>
       {notesH.map{ n => <div>{n}</div>}}

@@ -21,6 +21,18 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
     </section>
   }
 
+  private def listBranches = {
+    import collection.JavaConverters._
+    val g = new Git(repository)
+    try {
+      <ul>
+        {g.branchList().call().asScala.map { b =>
+        <li>{b.getName} {b.getLeaf.toString}</li>
+      }}
+      </ul>
+    } finally g.close()
+  }
+
   get("/") {
     val notes = new Git(repository)
       .notesList()
@@ -42,6 +54,8 @@ class CRServlet(repository: Repository) extends ScalatraServlet {
     <body>
       {cloneInstruction}
       {postRequestForm}
+      <hr/>
+      {listBranches}
       <hr/>
       {notesH.map{ n => <div>{n}</div>}}
     </body>

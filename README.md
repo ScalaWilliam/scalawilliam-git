@@ -121,3 +121,14 @@ $ websub-execute -u https://git.digitalocean.scalawilliam.com/ -i -- 'cd ~/Proje
 
 I can run this on my Mac if I need to :-)
 And then scale up to something bigger when more people are using the project...
+
+### Continuous sync to GitHub
+
+Super easy:
+```
+$ cd ~/Projects/test-gsw-1
+$ git remote add github git@github.com:ScalaWilliam/scalawilliam-git.git
+$ websub-execute -u https://git.digitalocean.scalawilliam.com/ -i -- 'cd ~/Projects/test-gsw-1 && git pull && git push github HEAD'
+```
+
+... try to do this with GitHub webhooks :-)

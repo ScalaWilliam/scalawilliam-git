@@ -13,6 +13,9 @@ import org.eclipse.jgit.lib.Repository
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder
 import org.eclipse.jgit.transport.{PostReceiveHook, ReceiveCommand, ReceivePack}
 
+/**
+  * TODO support multiple repos.
+  */
 object MainServer extends App {
 
   val configuration = ConfigFactory.load()
@@ -30,7 +33,6 @@ object MainServer extends App {
       r
     } else {
       val repositoryBuilder = new FileRepositoryBuilder()
-
       repositoryBuilder.setGitDir(gitDir)
       repositoryBuilder.build()
     }
